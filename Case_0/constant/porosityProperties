@@ -24,7 +24,7 @@ JensenEtAl2014Coeffs
     beta 2;
     gamma_p 0.34;
     d50 0.0159;
-    KC 128;
+    KC 68.68; //Se calcula usando parametros de oleaje y velocidad obtenida del movimiento libre (T = 0.7, n=0.5, um=0.78)
 }
 
 
