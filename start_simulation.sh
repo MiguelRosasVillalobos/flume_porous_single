@@ -61,7 +61,6 @@ for ((i = 1; i <= $cantidad; i++)); do
 	decomposePar
 	mpirun -np 6 interIsoFoam -parallel
 	bash ./freesurface_generator.sh
-	julia ./freesurface.jl
 	cd ..
 done
 
