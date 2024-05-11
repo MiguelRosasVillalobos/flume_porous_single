@@ -5,7 +5,7 @@ output_file="freesurface.csv"
 touch "$output_file"
 
 # Obtener la lista de carpetas *.* en la carpeta y ordenarlas numéricamente
-folders=$(find ./postProcessing/freeSurface -mindepth 1 -maxdepth 1 -type d -name "*" | sort -n)
+folders=$(find ./postProcessing/freeSurface -mindepth 1 -maxdepth 1 -type d -name "*" | sort -V)
 
 # Recorrer cada carpeta
 for folder in $folders; do
