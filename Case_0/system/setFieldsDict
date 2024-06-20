@@ -15,10 +15,15 @@ FoamFile
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 //Dimensions of the flume and free surface
 l 6;
-hm  0.59;
 h  0.3;
 wt  0.01;
 H  0.06;
+
+//distance porous media
+a $aa;
+l1 #eval{4.1+$a};
+l2 #eval{$l1+0.1};
+
 defaultFieldValues
 (
     volScalarFieldValue alpha.water 0

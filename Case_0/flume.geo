@@ -1,13 +1,12 @@
-
 //Dimensions of the flume and free surface
 l = 6;
-hm = 0.59;
+hm = 0.4;
 h = 0.3;
 wt = 0.01;
 H = 0.06;
 
 // Characteristic mesh length
-lc = 0.02; 
+lc = 0.009; 
 
 // Define points with coordinates and characteristic length
 Point(1) = {0, 0, 0, lc};
@@ -33,7 +32,7 @@ Recombine Surface {1};
 
 // Extrude the surface to create a volume
 Extrude {0, 0, wt} {
-    Surface{1}; Layers{5}; Recombine;
+    Surface{1}; Layers{2}; Recombine;
 }
 
 // Define the volume as transfinite
@@ -51,7 +50,7 @@ Physical Volume("internal") = {1};
 Field[1] = Box;
 
 // Set the field where the mesh will be fine
-Field[1].VIn = 0.001;
+Field[1].VIn = lc/2.5;
 Field[1].XMin = 0;
 Field[1].XMax = l;
 Field[1].YMin = h-H;
