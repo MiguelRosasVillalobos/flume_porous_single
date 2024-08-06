@@ -19,11 +19,6 @@ h  0.3;
 wt  0.01;
 H  0.06;
 
-//distance porous media
-a $aa;
-l1 #eval{4.1+$a};
-l2 #eval{$l1+0.1};
-
 defaultFieldValues
 (
     volScalarFieldValue alpha.water 0
@@ -47,7 +42,7 @@ regions
 
         fieldValues
         (
-            volScalarFieldValue porosity 0.50
+            volScalarFieldValue porosity $nn
         );
     }
 );

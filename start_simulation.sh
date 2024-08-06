@@ -1,13 +1,8 @@
 #!/bin/bash
 #Miguel Rosas
 
-# Lista de valores para lc
-#valores_a=("0.1875" "0.25" "0.375" "0.75" "1.5" "1.125" "0.3" "0" "1.8" "1.4" "0.5" "0.2" "0.3")
-#valores_a=("0.1875" "0.375" "0.5625" "0.75" "0.9375" "1.125" "1.3125" "1.5" "1.6875")
-# valores_a=("0.075" "0.15" "0.225" "0.45" "0.525" "0.6" "0.675" "0.9375" "1.275" "1.65")
-# valores_a=("0.6375" "0.825" "0.9" "0.975" "1.05" "1.2" "1.35" "1.425" "1.575" "1.725")
-# valores_a=("0.0675" "0.8325" "0.4425" "0.4575" "0.8175" "0.8325" "1.1925" "1.2075" "1.5675" "1.5825")
-valores_a=("0.3" "0.375" "0.8175")
+# Leer valores desde el archivo parametros.txt
+n=$(grep -oP 'n\s*=\s*\K[\d.+-]+' parameters.txt)
 
 # Verifica si se proporciona la cantidad como argumento
 if [ $# -eq 0 ]; then
@@ -16,7 +11,7 @@ if [ $# -eq 0 ]; then
 fi
 
 # Obtiene la cantidad desde el primer argumento
-cantidad=$1
+cantidad=1
 
 # Bucle para crear y mover carpetas, editar y genrar mallado
 for ((i = 1; i <= $cantidad; i++)); do
@@ -35,6 +30,9 @@ for ((i = 1; i <= $cantidad; i++)); do
 	cp "Case_0/extract_freesurface.sh" "$nombre_carpeta/"
 	cp "Case_0/extractor.py" "$nombre_carpeta/"
 
+	ddir=$(pwd)
+	sed -i "s|\$ddir|$ddir|g" "./$nombre_carpeta/extract_freesurface_plane.py"
+
 	# Copia un archivo dentro de la carpeta
 	archivo_geo="Case_0/flume.geo"
 	archivo_geoi="flume_Case_$i.geo"
@@ -43,10 +41,10 @@ for ((i = 1; i <= $cantidad; i++)); do
 
 	# Realiza el intercambio en el archivo
 	valor_a="${valores_a[i - 1]}"
-	sed -i "s/\$aa/$valor_a/g" "$nombre_carpeta/system/setFieldsDict"
-	sed -i "s/\$aa/$valor_a/g" "$nombre_carpeta/extractor.py"
 	sed -i "s/\$i/$i/g" "$nombre_carpeta/extract_freesurface_plane.py"
 	sed -i "s/\$i/$i/g" "$nombre_carpeta/extractor.py"
+	sed -i "s/\$nn/$n/g" "$nombre_carpeta/constant/porosityProperties"
+	sed -i "s/\$nn/$n/g" "$nombre_carpeta/system/setFieldsDict"
 
 	#Generar mallado gmsh
 	cd "$nombre_carpeta/"
@@ -68,10 +66,8 @@ for ((i = 1; i <= $cantidad; i++)); do
 	sed -i '23s/patch/empty/ ' "constant/polyMesh/boundary"
 	setFields
 	decomposePar
-	mpirun -np 8 interIsoFoam -parallel
-	# bash ./extract_freesurface.sh
-	# python3 extractor.py
-	# rm -r ./proce*
+	mpirun -np 8 interIsoFoam -parallel >log
+	kitty --hold -e bash -c "./extract_freesurface.sh && python3 extractor.py && rm -r ./proce*; exec bash" &
 	cd ..
 done
 

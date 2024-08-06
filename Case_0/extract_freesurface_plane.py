@@ -9,7 +9,7 @@ from paraview.simple import *
 paraview.simple._DisableFirstRenderCameraReset()
 
 # create a new 'Open FOAM Reader'
-case_$ifoam = OpenFOAMReader(registrationName='Case_$i.foam', FileName='/home/miguel/Desktop/OpenFOAM_Proyects/flume_porous_auto_vardouble/Case_$i/Case_$i.foam')
+case_$ifoam = OpenFOAMReader(registrationName='Case_$i.foam', FileName='$ddir/Case_$i/Case_$i.foam')
 
 # Properties modified on case_5foam
 case_$ifoam.SkipZeroTime = 0
@@ -134,7 +134,7 @@ SetActiveSource(contour1)
 HideInteractiveWidgets(proxy=slice2.SliceType)
 
 # save data
-SaveData('/home/miguel/Desktop/OpenFOAM_Proyects/flume_porous_auto_vardouble/Case_$i/data$p.csv', proxy=contour1, WriteTimeSteps=1,
+SaveData('$ddir/Case_$i/data$p.csv', proxy=contour1, WriteTimeSteps=1,
     ChooseArraysToWrite=1,
     PointDataArrays=['alpha.water'])
 
