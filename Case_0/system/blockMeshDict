@@ -1,0 +1,128 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2306                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+l 6;
+hm 0.4;
+h 0.3;
+wt 0.01;
+H 0.06;
+dx 0.5;
+p11 4;
+
+nx 400;
+ny 20;
+nz 2;
+
+
+h1 #eval{$h+$H};
+h2 #eval{$h-$H};
+dp11 #eval{$p11 - $dx};
+
+vertices
+(
+   (0 0 0) //0
+   ($dp11 0 0) //1
+   ($dp11 $h2 0) //2
+   (0 $h2 0) //3
+   (0 0 $wt) //4
+   ($dp11 0 $wt) //5
+   ($dp11 $h2 $wt) //6
+   (0 $h2 $wt) //7
+   ($dp11 $h1 0) //8
+   (0 $h1 0) //9
+   ($dp11 $h1 $wt) //10
+   (0 $h1 $wt) //11
+   ($l 0 0) //12
+   ($l $h2 0) //13
+   ($l 0 $wt) //14
+   ($l $h2 $wt) //15
+   ($l $h1 0) //16
+   ($l $h1 $wt) //17
+);
+
+blocks
+(
+    //bottom1
+    hex (0 1 2 3 4 5 6 7) (#eval{1*$nx} $ny $nz) simpleGrading (1 1 1)
+    //interface1
+    hex (3 2 8 9 7 6 10 11) (#eval{1*$nx} $ny $nz) simpleGrading (1 1 1)
+    //bottom2
+    hex (1 12 13 2 5 14 15 6) (#eval{2*$nx} $ny $nz) simpleGrading (1 1 1)
+    //interface2
+    hex (2 13 16 8 6 15 17 10) (#eval{2*$nx} $ny $nz) simpleGrading (1 1 1)
+);
+
+edges
+(
+);
+
+boundary
+(
+    inlet
+    {
+        type patch;
+        faces
+        (
+        (4 0 3 7)
+        (7 3 9 11)
+        );
+    }
+    rightWall
+    {
+        type wall;
+        faces
+        (
+        (12 14 15 13)
+        (13 15 17 16)
+        );
+    }
+    lowerWall
+    {
+        type wall;
+        faces
+        (
+        (0 4 5 1)
+        (1 5 14 12)
+        );
+    }
+    atmosphere
+    {
+        type patch;
+        faces
+        (
+        (11 9 8 10)
+        (10 8 16 17)
+        );
+    }
+    sides
+    {
+        type empty;
+        faces
+        (
+        (0 1 2 3)
+        (4 5 6 7)
+        (3 2 8 9)
+        (7 6 10 11)
+        (1 12 13 2)
+        (5 14 15 6)
+        (2 13 16 8)
+        (6 15 17 10)
+        );
+    }
+);
+
+mergePatchPairs
+(
+);
