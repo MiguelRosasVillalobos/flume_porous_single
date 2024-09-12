@@ -22,7 +22,7 @@ inlet
     waveAngle       0.0;
     rampTime        2.0;
     activeAbsorption yes;
-    wavePeriod      0.7;
+    wavePeriod      1;
 }
 
 // ************************************************************************* //
