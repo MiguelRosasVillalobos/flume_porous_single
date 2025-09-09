@@ -1,0 +1,101 @@
+solid atmosphere
+ facet normal 0 0 1
+  outer loop
+   vertex 6 0.48 0.4
+   vertex 0 0.48 0.4
+   vertex 0 0 0.4
+  endloop
+ endfacet
+ facet normal 0 0 1
+  outer loop
+   vertex 6 0.48 0.4
+   vertex 0 0 0.4
+   vertex 6 0 0.4
+  endloop
+ endfacet
+endsolid atmosphere
+solid inlet
+ facet normal -1 0 0
+  outer loop
+   vertex 0 0.48 0
+   vertex 0 0 0
+   vertex 0 0.48 0.4
+  endloop
+ endfacet
+ facet normal -1 0 0
+  outer loop
+   vertex 0 0 0
+   vertex 0 0 0.4
+   vertex 0 0.48 0.4
+  endloop
+ endfacet
+endsolid inlet
+
+solid wall_1
+ facet normal 1 0 0
+  outer loop
+   vertex 6 0 0
+   vertex 6 0.48 0
+   vertex 6 0.48 0.4
+  endloop
+ endfacet
+ facet normal 1 -0 0
+  outer loop
+   vertex 6 0 0.4
+   vertex 6 0 0
+   vertex 6 0.48 0.4
+  endloop
+ endfacet
+endsolid wall_1
+
+solid wall_2
+ facet normal 0 -1 0
+  outer loop
+   vertex 6 0 0
+   vertex 6 0 0.4
+   vertex 0 0 0
+  endloop
+ endfacet
+ facet normal 0 -1 0
+  outer loop
+   vertex 0 0 0
+   vertex 6 0 0.4
+   vertex 0 0 0.4
+  endloop
+ endfacet
+endsolid wall_2
+
+
+solid wall_3
+ facet normal 0 1 0
+  outer loop
+   vertex 6 0.48 0.4
+   vertex 6 0.48 0
+   vertex 0 0.48 0
+  endloop
+ endfacet
+ facet normal 0 1 0
+  outer loop
+   vertex 6 0.48 0.4
+   vertex 0 0.48 0
+   vertex 0 0.48 0.4
+  endloop
+ endfacet
+endsolid wall_3
+
+solid wall_4
+ facet normal 0 0 -1
+  outer loop
+   vertex 0 0.48 0
+   vertex 6 0.48 0
+   vertex 0 0 0
+  endloop
+ endfacet
+ facet normal 0 0 -1
+  outer loop
+   vertex 0 0 0
+   vertex 6 0.48 0
+   vertex 6 0 0
+  endloop
+ endfacet
+endsolid wall_4

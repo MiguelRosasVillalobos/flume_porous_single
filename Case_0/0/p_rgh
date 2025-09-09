@@ -25,19 +25,26 @@ boundaryField
         type            fixedFluxPressure;
         value           uniform 0;
     }
-
-    rightWall
+    wall_1
     {
         type            fixedFluxPressure;
         value           uniform 0;
     }
-
-    lowerWall
+    wall_2
     {
         type            fixedFluxPressure;
         value           uniform 0;
     }
-
+    wall_3
+    {
+        type            fixedFluxPressure;
+        value           uniform 0;
+    }
+    wall_4
+    {
+        type            fixedFluxPressure;
+        value           uniform 0;
+    }
     atmosphere
     {
         type            totalPressure;
@@ -47,11 +54,6 @@ boundaryField
         rho             rho;
         gamma           1;
         value           uniform 0;
-    }
-
-    sides
-    {
-        type            empty;
     }
 }
 

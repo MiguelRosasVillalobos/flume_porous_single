@@ -27,28 +27,30 @@ boundaryField
         type            calculated;
         value           $internalField;
     }
-
-    rightWall
+    wall_1
     {
         type            calculated;
         value           $internalField;
     }
-
-    lowerWall
+    wall_2
     {
         type            calculated;
         value           $internalField;
     }
-
+    wall_3
+    {
+        type            calculated;
+        value           $internalField;
+    }
+    wall_4
+    {
+        type            calculated;
+        value           $internalField;
+    }
     atmosphere
     {
         type            calculated;
         value           $internalField;
-    }
-
-    sides
-    {
-        type            empty;
     }
 }
 

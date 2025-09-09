@@ -16,8 +16,7 @@ FoamFile
 //Dimensions of the flume and free surface
 l 6;
 h  0.3;
-wt  0.01;
-H  0.06;
+wt  0.48;
 
 defaultFieldValues
 (
@@ -29,7 +28,7 @@ regions
 (
     boxToCell
     {
-        box (0 0 0) ($l $h $wt);
+        box (0 0 0) ($l $wt $h);
 
         fieldValues
         (
@@ -38,7 +37,7 @@ regions
     }
    boxToCell
     {
-        box (4 0 0) (4.1 0.35 $wt);
+        box (2.95 0 0) (3.05 $wt 0.4);
 
         fieldValues
         (

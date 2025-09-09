@@ -32,15 +32,19 @@ boundaryField
         inletValue      uniform 0;
         value           uniform 0;
     }
-    rightWall
+    wall_1
     {
         type            zeroGradient;
     }
-    sides
+    wall_2
     {
-        type            empty;
+        type            zeroGradient;
     }
-    lowerWall
+    wall_3
+    {
+        type            zeroGradient;
+    }
+    wall_4
     {
         type            zeroGradient;
     }

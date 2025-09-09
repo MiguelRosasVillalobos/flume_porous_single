@@ -25,26 +25,26 @@ boundaryField
         type            waveVelocity;
         value           uniform (0 0 0);
     }
-
-    rightWall
+    wall_1
     {
         type            slip;
     }
-
-    lowerWall
+    wall_2
     {
         type            slip;
     }
-
+    wall_3
+    {
+        type            slip;
+    }
+    wall_4
+    {
+        type            slip;
+    }
     atmosphere
     {
         type            pressureInletOutletVelocity;
         value           uniform (0 0 0);
-    }
-
-    sides
-    {
-        type            empty;
     }
 }
 

@@ -23,12 +23,12 @@ for ((i = 1; i <= $cantidad; i++)); do
   cp "Case_0/extract_freesurface_plane.py" "$nombre_carpeta/"
   cp "Case_0/extract_freesurface.sh" "$nombre_carpeta/"
   cp "Case_0/extractor.py" "$nombre_carpeta/"
+  cp "Case_0/flume.stl" "$nombre_carpeta/"
 
   ddir=$(pwd)
   sed -i "s|\$ddir|$ddir|g" "./$nombre_carpeta/extract_freesurface_plane.py"
 
   # Realiza el intercambio en el archivo
-  valor_a="${valores_a[i - 1]}"
   sed -i "s/\$i/$i/g" "$nombre_carpeta/extract_freesurface_plane.py"
   sed -i "s/\$i/$i/g" "$nombre_carpeta/extractor.py"
   sed -i "s/\$nn/$n/g" "$nombre_carpeta/constant/porosityProperties"
@@ -36,11 +36,11 @@ for ((i = 1; i <= $cantidad; i++)); do
 
   cd "$nombre_carpeta/"
 
-  blockMesh
+  cartesianMesh
   setFields
   decomposePar
-  mpirun -np 6 interIsoFoam -parallel >log
-  kitty --hold -e bash -c "./extract_freesurface.sh && python3 extractor.py && rm -r ./proce*; exec bash" &
+  mpirun -np 10 interIsoFoam -parallel >log
+  # kitty --hold -e bash -c "./extract_freesurface.sh && python3 extractor.py && rm -r ./proce*; exec bash" &
   cd ..
 done
 
